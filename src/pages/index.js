@@ -1,40 +1,15 @@
  import Link from "next/link";
- import { motion, useAnimation } from "framer-motion";
- import { useInView } from "react-intersection-observer";
+ import { motion } from "framer-motion";
  import React from "react";
- import { useState } from "react";
 
  const index = () => {
 
-      const { ref, inView } = useInView();
-      const controls = useAnimation();
-
-      React.useEffect(() => {
-        if (inView) {
-          controls.start("visible");
-        }
-      }, [controls, inView]);
-
-      const variants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 1, ease: "easeOut" },
-        },
-
-      }
-      const [isOpen, setIsOpen] = useState(false)
-
-      const toggle = () => {
-        setIsOpen(true)
-      }
+     
   return ( 
       <motion.div
-      ref={ref}
-      animate={controls}
-      initial="hidden"
-      variants={variants}
+      initial={{ opacity: 0, y: 100 }}
+           animate={{ opacity: 1, y:0 }}
+           transition={{ duration: 0.8, ease:"easeInOut" }}
        className='min-h-screen overflow-y-hidden '>
 
           <motion.header
@@ -56,7 +31,7 @@
                    <Link href={'/'} className="hover:bg-slate-700 py-[6px] px-[25px] rounded-[5px]">Contact me</Link>
                 </li>
             </ul>
-            <button value={isOpen} onClick={toggle} className="text-xl sm:hidden mx-auto my-20 bg-white text-black p-[10px] rounded-lg hover:bg-green-500 transition ease-in-out duration-500 hover:text-white">
+            <button className="text-xl sm:hidden mx-auto my-20 bg-white text-black p-[10px] rounded-lg hover:bg-green-500 transition ease-in-out duration-500 hover:text-white">
               &#9776; Menu
             </button>
           </motion.header>
@@ -69,6 +44,7 @@
               className="mt-10">
                 <img 
                 className="rounded-full mx-auto h-[220px] w-[220px] "
+                alt="img"
                 src="/bankole.jpg"
                 />
              </motion.div>
